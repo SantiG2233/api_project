@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-# HOME
+# HOME Pls
 @app.route("/",methods=['POST'])
 def home():
     engine = create_engine('postgresql://postgres:(CIMB2023)@proyectosanti.postgres.database.azure.com:5432/postgres')
