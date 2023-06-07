@@ -19,4 +19,4 @@ def home():
     return json.dumps(payload)
 
 if __name__ == '_main_' or not hasattr(app, 'serve'):
-    app.run(debug=True)
+    app.run(debug=-False)
