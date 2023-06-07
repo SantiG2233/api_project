@@ -10,13 +10,13 @@ app = Flask(__name__)
 def home():
     engine = create_engine('postgresql://postgres:(CIMB2023)@proyectosanti.postgres.database.azure.com:5432/postgres')
     data = request.get_json()
-    time = f"""SELECT AVG("Throttle") FROM measurements WHERE measurement_time >= '{data['inicio']}'::timestamp - INTERVAL '60 second'"""
+    time = f"""SELECT AVG("Throttle") FROM measurements WHERE measurement_time >= '{data['inicio']}' and measurement_time <= '{data['final']}'"""
     df = pd.read_sql(sql=time,con=engine)
-    previous = df.iloc[0,0]
+    data_return = df.iloc[0,0]
     payload = {
-    'previous': previous,
+    'average': data_return,
     }
     return json.dumps(payload)
 
 if __name__ == '_main_' or not hasattr(app, 'serve'):
-    app.run(debug=False)
+    app.run(debug=True)
